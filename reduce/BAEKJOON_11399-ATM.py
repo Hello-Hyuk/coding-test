@@ -9,3 +9,5 @@ for i in range(n):
     ans += reduce(lambda x, y : x + y,stime[:i+1],0)
     
 print(ans)
+
+
