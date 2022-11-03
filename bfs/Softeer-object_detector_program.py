@@ -11,7 +11,7 @@ def bfs(x,y):
         x,y = dq.popleft()
         for i in range(4):
             nx = x+dx[i] 
-            ny = y+dy[i]
+            ny = y+dy[i]    
             if 0<=nx<n and 0<=ny< n:
                 if gt[nx][ny] == 1: 
                     gt[nx][ny] = 0 
