@@ -1,4 +1,4 @@
-# [level 2] 2 x n 타일링 - 12900 
+# [level 2] 2 x n 타일링 - 12900 DP
 
 [문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12900) 
 
