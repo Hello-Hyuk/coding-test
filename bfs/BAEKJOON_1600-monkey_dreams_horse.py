@@ -6,7 +6,10 @@ dy = [0,1,0,-1]
 
 h_dx = [-1, -2, -2, -1, 1, 2, 2, 1]
 h_dy = [-2, -1, 1, 2, 2, 1, -1, -2]
-
+import sys
+sys.setrecursionlimit(10**6)
+def bfs():
+    dq = deque([[0,0]])
 def bfs():
     # y, x, cnt, k 
     dq = deque([[0,0,0,k]])
