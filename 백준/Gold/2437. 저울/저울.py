@@ -4,6 +4,7 @@ input = sys.stdin.readline
 N = int(input())
 stones = list(map(int,input().split()))
 stones.sort()
+# 구간을 정해서 넓혀가기
 if stones[0] > 1:
     print(1)
 else :
