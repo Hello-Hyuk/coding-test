@@ -18,6 +18,7 @@ def move_ball(move, y, x):
             
 def bfs(r_idx,b_idx):
     dq = deque([[r_idx[0],r_idx[1],b_idx[0],b_idx[1],0]])
+    # set으로 활용시 시간 단축됨
     visited = set((r_idx[0],r_idx[1],b_idx[0],b_idx[1]))
     while dq:
         rr,rc,br,bc,cnt = dq.popleft()
