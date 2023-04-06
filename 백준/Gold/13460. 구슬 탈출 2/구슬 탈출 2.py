@@ -18,18 +18,17 @@ def move_ball(move, y, x):
             
 def bfs(r_idx,b_idx):
     dq = deque([[r_idx[0],r_idx[1],b_idx[0],b_idx[1],0]])
-    visited = []
+    visited = set((r_idx[0],r_idx[1],b_idx[0],b_idx[1]))
     while dq:
         rr,rc,br,bc,cnt = dq.popleft()
         if [rr,rc] == h_idx:
             return cnt
-        visited.append([rr,rc,br,bc])
         if cnt > 10:
             break
         for move in moves:
             red_cnt, nrr, nrc = move_ball(move, rr, rc)
             blue_cnt, nbr, nbc = move_ball(move, br, bc)
-            if [nrr,nrc,nbr,nbc] not in visited:
+            if (nrr,nrc,nbr,nbc) not in visited:
                 if gt[nbr][nbc] == 'O':
                     continue
                 if [nrr,nrc] == [nbr,nbc]:
@@ -40,7 +39,7 @@ def bfs(r_idx,b_idx):
                         nbr -= moves[move][0]
                         nbc -= moves[move][1]
                 dq.append([nrr,nrc,nbr,nbc,cnt+1])
-                visited.append([nrr,nrc,nbr,nbc])
+                visited.add((nrr,nrc,nbr,nbc))
     return -1
     
 moves = {1:(-1,0),2:(0,1),3:(1,0),4:(0,-1)}
