@@ -40,4 +40,3 @@ for i in adj:
 dfs(v)
 print()
 bfs(v)
-1
