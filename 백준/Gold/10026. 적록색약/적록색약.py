@@ -1,46 +1,48 @@
 import sys
+sys.setrecursionlimit(1000000)
 input = sys.stdin.readline
-from collections import deque
-# 적록색맹 R+G, B
-# 정상 R, G, B
-def bfs(r,c,color):
-    dq = deque([[r,c]])
-    while dq:
-        y, x = dq.popleft()
-        visited[y][x] = True
-        for move in moves:
-            ny = y + moves[move][0]
-            nx = x + moves[move][1]
-            if 0 <= ny < N and 0 <= nx < N and not visited[ny][nx]:
-                if gt[ny][nx] == color:
-                    visited[ny][nx] = True
-                    dq.append([ny,nx])
 
-    return 1
+n = int(input().rstrip())
+matrix = [list(input().rstrip()) for _ in range(n)]
+visited = [[False] * n for _ in range(n)]
 
-N = int(input())
-gt = []
-moves = {1:(1,0),2:(0,1),3:(-1,0),4:(0,-1)}
-for _ in range(N):
-    gt.append(list(input().rstrip()))
-visited = [[False for _ in range(N)] for _ in range(N)]
-ans = 0
-ans2 = 0
-for r in range(N):
-    for c in range(N):
-        if not visited[r][c]:
-            ans += bfs(r,c,gt[r][c])
+three_cnt, two_cnt = 0, 0
+dx = [-1,1,0,0]
+dy = [0,0,-1,1]
 
-for r in range(N):
-    for c in range(N):
-        if gt[r][c] == 'R':
-            gt[r][c] = 'G'
-            
-visited = [[False for _ in range(N)] for _ in range(N)]
+def dfs(x,y):
+    #현재 색상 좌표를 방문해준다.
+    visited[x][y] = True
+    current_color = matrix[x][y]
 
-for r in range(N):
-    for c in range(N):
-        if not visited[r][c]:
-            ans2 += bfs(r,c,gt[r][c])
+    for k in range(4):
+        nx = x + dx[k]
+        ny = y + dy[k]
+        if (0 <= nx < n) and (0 <= ny < n):
+            #현재 좌표의 색상과 상하좌우 좌표에 있는 색상이 같으면 dfs로 넣어준다.
+            if visited[nx][ny]==False:
+                if matrix[nx][ny] == current_color:
+                    dfs(nx,ny)
 
-print(ans,ans2)
+for i in range(n):
+    for j in range(n):
+        # 방문하지 않은 좌표이면 dfs로 넣어준다.
+        if visited[i][j]==False:
+            dfs(i,j)
+            three_cnt += 1
+
+#R을 G로 바꾸어준다. --> 적록색약은 같은 색으로 보기 때문에
+for i in range(n):
+    for j in range(n):
+        if matrix[i][j]=='R':
+            matrix[i][j]='G'
+
+visited = [[False] * n for _ in range(n)]
+
+for i in range(n):
+    for j in range(n):
+        if visited[i][j] == False:
+            dfs(i,j)
+            two_cnt += 1
+
+print(three_cnt,two_cnt)
