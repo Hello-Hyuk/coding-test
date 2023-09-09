@@ -43,6 +43,5 @@ vector<int> solution(vector<string> park, vector<string> routes) {
             }
         }
     }
-    
 	return { loc.first, loc.second };
 }
