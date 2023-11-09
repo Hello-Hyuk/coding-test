@@ -17,6 +17,7 @@ vector<int> solution(vector<int> progresses, vector<int> speeds) {
         if (days[idx]<days[i]){
             answer.push_back(i-idx);
             idx = i;
+            cout << idx << endl;
         }
     }   
     answer.push_back(days.size()-idx);
